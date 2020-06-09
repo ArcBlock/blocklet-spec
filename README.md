@@ -63,13 +63,13 @@ name, description, version, group 描述了 Blocklet 的基本信息。其中，
 
 ## 生命周期
 
-![blocklet lifecycle](./images/blocklet-lifecycle.png)
+![blocklet lifecycle](./blocklet-lifecycle.png)
 
 在 ABT Node 中, Blocklet 完整的生命周期包括 安装（或部署）、启动、停止、卸载 这四个阶段。因为可以通过两种方式来安装 Blocklet, 分别是在 Marketplace 中下载安装，另外一种是直接在本地用 ABT Node CLI 部署安装。用 CLI 部署主要是为了开发测试。所以在生命周期的第一阶段中存在安装、部署两种情况。
 
 ## Hooks
 
-![blocklet lifecycle](./images/blocklet-lifecycle-hooks.png)
+![blocklet lifecycle](./blocklet-lifecycle-hooks.png)
 
 在在这几个阶段中，ABT Node 提供了 hook 功能，用来在执行生命周期的过程中做一些事情。目前包含：pre-deploy, post-install, pre-start, pre-stop, pre-install, pre-uninstall 这几个 Hook.
 
