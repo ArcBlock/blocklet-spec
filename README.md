@@ -101,7 +101,7 @@ ABT Node 当前只支持 Node.js 的 Blocklet 项目，所以 Blocklet 的描述
 Blocklet 所有的描述信息都放在 blocklet.json 文件中。
 前面我们说，Blocklet 是一个 Node.js 项目，我们知道，Node.js 的 package.json 文件中也包含 name, description, version 这些信息。对于 Blocklet 来说，这部分重复的信息是等价的，ABT Node 会优先读取 blocklet.json 的配置，如果没有，才会去读取 package.json 中的。
 
-如下是 blocklet.json 例子例子。
+如下是 blocklet.json 例子。
 
 ```json
 {
