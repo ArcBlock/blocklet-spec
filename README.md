@@ -1,6 +1,6 @@
 ## 什么是 Blocklet？
 
-Blocklet 是一种应用协议，同时也是一种软件架构。作为一个协议，它描述了构建 ABT Node 平台的方式；做为一个软件架构, 一个独立的 Blocklet 是一个可重用的软件模块，可能是一个 HTTP 服务，也可能是一个函数库等等；当多个 Blocklet 在一起运行时，需要一个平台将它们组合起来，共同构成一个独立的服务，比如 ABT 节点(ABT Node).
+Blocklet 是一种应用协议，同时也是一种软件架构。作为一个协议，它描述了构建 ABT Node 平台的方式；作为一个软件架构, 一个独立的 Blocklet 是一个可重用的软件模块，可能是一个 HTTP 服务，也可能是一个函数库等等；当多个 Blocklet 在一起运行时，需要一个平台将它们组合起来，共同构成一个独立的服务，比如 ABT 节点(ABT Node).
 
 ## 如何定义 Blocklet？
 
@@ -17,7 +17,7 @@ Blocklet 是一种应用协议，同时也是一种软件架构。作为一个�
 }
 ```
 
-name, description, version, group 描述了 Blocklet 的基本信息。其中，group 分为 `dapp` 和 `static` 两种类型。`dapp` 就是常规的 dapp，static 是一中只包含了前端静态资源的 Web 应用，ABT Node 内部会用一个 HTTP Server 来 serve `static` Blocklet. 
+name, description, version, group 描述了 Blocklet 的基本信息。其中，group 分为 `dapp` 和 `static` 两种类型。`dapp` 就是常规的 dapp，static 是一中只包含了前端静态资源的 Web 应用，ABT Node 内部会用一个 HTTP Server 来 serve `static` Blocklet.
 
 ## 定义运行时设置
 
@@ -33,7 +33,7 @@ name, description, version, group 描述了 Blocklet 的基本信息。其中，
 }
 ```
 
-除了对 Blocklet 基本信息的描述，Blocklet 还定义了`main` 这个字段描述 Blocklet 如何开始运行，就是所谓的入口文件的描述。 这个字段和 Blocklet 的运行密切相关。`main` 定义了 dapp 或者 static 类型的 Blocklet 的入口文件或静态资源目录。所以对于 ABT Node 来说，`main` 字段是必须的，至关重要，否则 ABT Node 没有办法启动 Blocklet.
+除了对 Blocklet 基本信息的描述，Blocklet 还定义了 `main` 这个字段，用来描述 Blocklet 如何开始运行，就是所谓的入口文件。这个字段和 Blocklet 的运行密切相关。`main` 定义了 dapp 或者 static 类型的 Blocklet 的入口文件或静态资源目录。所以对于 ABT Node 来说，`main` 字段是必须的，至关重要，否则 ABT Node 没有办法启动 Blocklet.
 
 除了 main 字段，我们还定义了 `requiredEnvironments` 字段用来声明 Blocklet 运行时需要的环境变量。有四个属性描述一个环境变量：name, description, required, default. 设置为 required 的变量，并且没有提供默认值时，用户必须在启动前设置该变量。
 
@@ -65,13 +65,13 @@ name, description, version, group 描述了 Blocklet 的基本信息。其中，
 
 ![blocklet lifecycle](./blocklet-lifecycle.png)
 
-在 ABT Node 中, Blocklet 完整的生命周期包括 安装（或部署）、启动、停止、卸载 这四个阶段。因为可以通过两种方式来安装 Blocklet, 分别是在 Marketplace 中下载安装，另外一种是直接在本地用 ABT Node CLI 部署安装。用 CLI 部署主要是为了开发测试。所以在生命周期的第一阶段中存在安装、部署两种情况。
+在 ABT Node 中, Blocklet 完整的生命周期包括 安装（或部署）、启动、停止、卸载 这四个阶段。有两种方式来安装 Blocklet, 一种是在 Marketplace 中下载安装，另外一种是直接在本地用 ABT Node CLI 部署安装。用 CLI 部署主要是为了开发测试。在生命周期的第一阶段中存在安装、部署两种情况。
 
 ## Hooks
 
 ![blocklet lifecycle](./blocklet-lifecycle-hooks.png)
 
-在在这几个阶段中，ABT Node 提供了 hook 功能，用来在执行生命周期的过程中做一些事情。目前包含：pre-deploy, post-install, pre-start, pre-stop, pre-install, pre-uninstall 这几个 Hook.
+在这几个阶段中，ABT Node 提供了 hook 功能，用来在执行生命周期的过程中做一些事情。目前包含：pre-deploy, post-install, pre-start, pre-stop, pre-install, pre-uninstall 这几个 Hook.
 
 比如，某个 Blocklet 对于运行的机器有硬件要求：内存不能低于 1G，可用磁盘容量不能低于 500 MB。这个时候就可以利用 pre-install hook 来检测目标机器是否已满足需求，如果满足，正常安装，否则抛出错误消息，并终止安装。
 
@@ -94,7 +94,7 @@ ABT Node CLI 提供了 `abtnode blocklet:init` 命令来帮助开发者快速创
 ```
 
 项目创建完成后，我们可以看到一个 Blocklet 项目主要包含两部分：Blocklet 描述信息和源代码。
-ABT Node 当前只支持 Node.js 的 Blocklet 项目，所以 Blocklet 的描述信息一般会包含包含两部分：Node.js 的 package.json 和 Blocklet 的 blocklet.json. 我们在前面讲的 Blocklet Spec 的内容会放在 blocklet.json 中。当然，Blocklet 也允许将 blocklet.json 的内容放到 package.json 的 `blocklet` 字段中。 
+ABT Node 当前只支持 Node.js 的 Blocklet 项目，所以 Blocklet 的描述信息一般会包含两部分：Node.js 的 package.json 和 Blocklet 的 blocklet.json. 我们在前面讲的 Blocklet Spec 的内容会放在 blocklet.json 中。当然，Blocklet 也允许将 blocklet.json 的内容放到 package.json 的 `blocklet` 字段中。
 
 ### blocklet.json
 
@@ -152,7 +152,7 @@ Blocklet 开发完成后需要将代码打包才能进行部署，ABT CLI 提供
 
 ### 在 ABT Node 中测试
 
-在了解 Blocklet 声明周期一节时， 我们提到了部署(Deploy)阶段，这个命令可以将打包好的项目部署到本地 ABT Node 节点中，用来测试 Blocklet.
+在 Blocklet 生命周期一节，我们提到了部署(Deploy)阶段，这个命令可以将打包好的项目部署到本地 ABT Node 节点中，用来测试 Blocklet。ABT CLI 提供了 `abtnode deploy /path/to/your/project` 命令来把本地 Blocklet 部署本地 ABT Node 节点中。其中，`/path/to/your/project` 就是 `blocklet.json` 文件所在的目录。
 
 ## 如何发布 Blocklet？
 
