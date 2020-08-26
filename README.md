@@ -152,7 +152,7 @@ Blocklet 开发完成后需要将代码打包才能进行部署，ABT CLI 提供
 
 ### 在 ABT Node 中测试
 
-在了解 Blocklet 声明周期一节时， 我们提到了部署(Deploy)阶段，这个命令可以将打包好的项目部署到本地 ABT Node 节点中，用来测试 Blocklet.
+在了解 [Blocklet 生命周期](#blocklet-生命周期) 一节时， 我们提到了部署(Deploy)阶段，这个命令可以将打包好的项目部署到本地 ABT Node 节点中，用来测试 Blocklet.
 
 ## 如何发布 Blocklet？
 
